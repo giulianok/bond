@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'EurostileLTStd-Ex2';
+    src: url('fonts/EurostileLTStd-Ex2.eot');
+    src: local('☺'), url('fonts/EurostileLTStd-Ex2.woff') format('woff'), url('fonts/EurostileLTStd-Ex2.ttf') format('truetype'), url('fonts/EurostileLTStd-Ex2.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+$gold: #F3D55E;
+$gold-dark: #908159;
+$font: 'EurostileLTStd-Ex2';
+
+.color-gold{
+    color: $gold !important;
+}
+.color-gold-dark{
+    color: $gold-dark !important;
+}
+.font{
+    font-family: 'EurostileLTStd-Ex2', Arial;
+}
+
+
+
+@mixin transform($value){
+    -ms-transform: $value; /* IE 9 */
+    -webkit-transform: $value; /* Chrome, Safari, Opera */
+    transform: $value;
+}
+@mixin transition($value){
+    -webkit-transition: $value; /* For Safari 3.1 to 6.0 */
+    transition: $value;
+}
+@mixin transition-delay($value){
+    -webkit-transition-delay: $value; /* For Safari 3.1 to 6.0 */
+    transition-delay: $value;
+}
+@mixin animation($value){
+    -webkit-animation: $value; /* Safari 4+ */
+    -moz-animation:    $value; /* Fx 5+ */
+    -o-animation:      $value; /* Opera 12+ */
+    animation:         $value; /* IE 10+, Fx 29+ */
+}
+
+/*@mixin fading-text($start, $duration, $max, $i:1){
+    &:nth-child(${i}){
+        @include transition-delay($start);
+        @include transition(all $duration ease);
+        opacity: 1;
+    }
+}*/
+
+
+
+@mixin back-effect($limit, $delay:0, $speed:.15s, $i:1){
+    img:nth-child(#{$i}){
+        opacity: 1 !important;
+        @include transition(all .7s);
+        @include transition-delay($delay);
+    }
+    @if $limit > $i {
+        @include back-effect($limit, $delay+$speed, $speed, $i+1);
+    }
+}
+
+@mixin logo-letters($limit, $delay:0s, $speed:.05s, $i:1){
+    div:nth-child(#{$i}){
+        img:first-child, img:last-child{
+            opacity: 1;
+            width: 100%;
+            left: 0;
+            @include transform(scale(1));
+            @include transition(all .7s);
+            @include transition-delay($delay);
+        }
+    }
+    @if $limit > $i {
+        @include logo-letters($limit, $delay+$speed, $speed, $i+1);
+    }
+}

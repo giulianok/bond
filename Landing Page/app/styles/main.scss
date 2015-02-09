@@ -1,0 +1,197 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+
+
+@import "_variables.scss";
+
+
+
+html, body{
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: black;
+    font-family: Verdana, Arial;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+
+    a{
+        &, &:active, &:hover, &:visited{
+            color: white;
+        }
+    }
+    
+    .strong{
+        font-weight: bold !important;
+    }
+
+    #loading{
+        display: table;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        z-index: 9;
+        overflow: hidden;
+        span{
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
+    }
+
+    main{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+
+        #logo{
+            position: relative;
+            width: 900px;
+            height: 564px;
+            #back{
+                img{
+                    display: block;
+                    float: left;
+                    border: black solid 3px;
+                    opacity: 0;
+                }
+            }
+            #letters{
+                position: absolute;
+                top: 146px;
+                & > div{
+                    display: inline-block;
+                    position: relative;
+                    margin: 31px;
+                }
+                img{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    opacity: 0;
+                }
+                .b{
+                    width: 154px;
+                    height: 183px;
+                    img:first-child{
+                        @include transform(scale(.6, .9));
+                    }
+                }
+                .o{
+                    width: 162px;
+                    height: 183px;
+                    img:first-child{
+                        @include transform(scale(.6, .9));
+                    }
+                }
+                .n{
+                    width: 158px;
+                    height: 185px;
+                    img:first-child{
+                        width: 130px;
+                    }
+                    img:last-child{
+                        width: 130px;
+                        left: 21px;
+                    }
+                }
+                .d{
+                    width: 163px;
+                    height: 182px;
+                    img:first-child{
+                        @include transform(scale(.6, .9));
+                    }
+                }
+            }
+            #slogan{
+                position: absolute;
+                left: 35px;
+                top: 382px;
+                opacity: 0;
+                @include transform(scale(.1, .5));
+            }
+        }
+
+        p, h1{
+            text-transform: uppercase;
+            margin: 20px 0;
+        }
+        h1{
+            font-size: 2em;
+        }
+        .social-media{
+            &, li{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            li{
+                display: inline-block;
+                margin: 10px;
+                a{
+                    &:hover{
+                        opacity: .7;
+                    }
+                }
+            }
+        }
+        .fade{
+            opacity: 0;
+            &.active{
+                @include transition(all .5s ease);
+                opacity: 1;
+            }
+        }
+    }
+}
+
+body.active{
+    #loading{
+        height: 0;
+        opacity: 0;
+        @include transition(all 1s ease);
+    }
+    main{
+        #back{
+            @include back-effect($limit:4);
+        }
+        #logo{
+            top: 0 !important;
+            margin-top: 0 !important;
+            @include transition(all 1s ease);
+            @include transition-delay(2s);
+            #letters{
+                @include logo-letters($limit:5, $delay:.5s, $speed:.3s);
+            }
+            #slogan{
+                opacity: 1;
+                @include transform(scale(1));
+                @include transition(all 1s ease);
+                @include transition-delay(1.2s);
+            }
+        }
+    }
+}
+.fade.active{
+    opacity: 1;
+    @include transition(all 1s ease);
+}
